@@ -1,4 +1,4 @@
-import indexHTML from "./index.html.js"
+import indexHTML from "./index.html"
 
 const keyList = "list"
 
@@ -30,6 +30,10 @@ async function generate(request, env, ctx) {
     width: Number.parseInt(url.searchParams.get("width")),
     prompt: url.searchParams.get("prompt"),
   };
+
+  if (url.searchParams.get("negative_prompt") !== "") {
+    inputs.negative_prompt = url.searchParams.get("negative_prompt");
+  }
 
   console.log(inputs)
   const response = await env.AI.run(
